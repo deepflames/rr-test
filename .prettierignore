@@ -1,0 +1,8 @@
+# Add files here to ignore them from prettier formatting
+*.d.ts
+index.html
+index.aspx
+*.css
+*.min.*
+externals.js
+config/postman/IDM.postman_collection.json

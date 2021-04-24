@@ -1,0 +1,39 @@
+@import '../../styles/variables';
+
+.list-view {
+  height: calc(100% - 2.4rem);
+  padding: 2rem 4rem;
+  overflow: auto;
+
+  .box {
+    margin-bottom: 0.5rem;
+    max-height: 140px;
+  }
+
+  .card {
+    max-height: 240px;
+  }
+
+  h5 {
+    margin-bottom: 8px;
+  }
+
+  p {
+    padding-top: 4px;
+
+    &.is-multiline {
+      display: block;
+      display: -webkit-box;
+      color: $grey;
+      max-width: 100%;
+      height: 36px;
+      margin: 0 auto;
+      font-size: 12px;
+      line-height: 16px;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
