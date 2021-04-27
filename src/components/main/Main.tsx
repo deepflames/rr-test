@@ -6,6 +6,7 @@ import Store, { StoreProps } from '../../store/store';
 import ListView from '../list-view/List-view';
 import Navigation from '../navigation/Navigation';
 import Preloader from '../preloader/preloader';
+import DetailView from '../detail-view/Detail-view';
 
 class Main extends Component<StoreProps, unknown> {
   async componentDidMount(): Promise<void> {
@@ -28,6 +29,8 @@ class Main extends Component<StoreProps, unknown> {
         <Section className="_list-view" data-testid="list-view-wrapper">
           {data && <ListView />}
         </Section>
+
+        <DetailView />
       </div>
     );
   }

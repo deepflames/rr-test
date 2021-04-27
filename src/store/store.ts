@@ -13,6 +13,7 @@ type SharedOptionsType = {
   onSearch?: string;
   onFilter: string;
   onPreloader: boolean;
+  onDetailView?: { data?: Account; value: boolean };
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +28,8 @@ const initialSharedOptions: SharedOptionsType = {
   viewType: 0,
   onSearch: void 0,
   onFilter: 'all:-1',
-  onPreloader: false
+  onPreloader: false,
+  onDetailView: void 0
 };
 
 ////////////////////////////////////////////////////////////////////////////////

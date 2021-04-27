@@ -8,10 +8,20 @@
   .box {
     margin-bottom: 0.5rem;
     max-height: 140px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken($white, 3);
+    }
   }
 
   .card {
     max-height: 240px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken($white, 3);
+    }
   }
 
   h5 {

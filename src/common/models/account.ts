@@ -8,4 +8,7 @@ export class Account extends Base {
   address1_country?: string = void 0;
   address1_stateorprovince?: string = void 0;
   description?: string = void 0;
+  telephone1?: string = void 0;
+  websiteurl?: string = void 0;
+  emailaddress1?: string = void 0;
 }

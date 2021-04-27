@@ -24,6 +24,8 @@ class ListView extends Component<StoreProps, State> {
     this.state = {
       viewType: 0
     };
+
+    this.onItemClick = this.onItemClick.bind(this);
   }
 
   componentDidMount() {
@@ -47,7 +49,11 @@ class ListView extends Component<StoreProps, State> {
           data?.map(
             (item: Account, index) =>
               item.accountnumber && (
-                <Box key={index} data-testid={`list-type-${index}`}>
+                <Box
+                  key={index}
+                  data-testid={`list-type-${index}`}
+                  data-id={item.accountnumber}
+                  onClick={this.onItemClick}>
                   <Media>
                     <Media.Item>
                       <Content>
@@ -72,7 +78,7 @@ class ListView extends Component<StoreProps, State> {
                     key={index}
                     data-testid="card-type-column"
                     className="is-one-third">
-                    <Card>
+                    <Card data-id={item.accountnumber} onClick={this.onItemClick}>
                       <Card.Content>
                         <Media>
                           <Media.Item>
@@ -94,6 +100,18 @@ class ListView extends Component<StoreProps, State> {
         )}
       </div>
     );
+  }
+
+  private onItemClick(event: MouseEvent): void {
+    const { store } = this.props;
+    const target = event.currentTarget as HTMLDataElement;
+    const id = target.dataset['id'];
+    if (!id) return;
+
+    const data = store.get('data');
+    const itemData = data?.find(item => item.accountnumber === id);
+
+    this.props.sharedOptions.set('onDetailView')({ data: itemData, value: true });
   }
 }
 
