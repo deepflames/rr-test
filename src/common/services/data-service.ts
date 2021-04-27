@@ -25,7 +25,7 @@ export default class DataService extends ApiService {
 
   searchOnAccounts(opts: { value?: string; filter?: string }): Promise<Account[] | null> {
     let path = `${this.apiPath('accounts')}?`;
-    console.log(opts.filter);
+
     if (opts.value) {
       path = `${path}$filter=contains(name, '${opts.value}')`;
     }

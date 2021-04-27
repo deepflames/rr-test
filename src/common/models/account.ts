@@ -1,11 +1,11 @@
 import { Base } from './base';
 
 export class Account extends Base {
-  name?: string;
-  accountnumber?: string;
-  address1_line1?: string;
-  address1_city?: string;
-  address1_country?: string;
-  address1_stateorprovince?: string;
-  description?: string;
+  name?: string = void 0;
+  accountnumber?: string = void 0;
+  address1_line1?: string = void 0;
+  address1_city?: string = void 0;
+  address1_country?: string = void 0;
+  address1_stateorprovince?: string = void 0;
+  description?: string = void 0;
 }

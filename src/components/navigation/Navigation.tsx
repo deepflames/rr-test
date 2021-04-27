@@ -8,7 +8,11 @@ import './Navigation.scss';
 import Store, { StoreProps } from '../../store/store';
 import { Account } from '../../common/models/account';
 
-class Navigation extends Component<StoreProps> {
+interface State {
+  activeViewType: number;
+}
+
+class Navigation extends Component<StoreProps, State> {
   private searchRef: HTMLInputElement | null = null;
 
   private onSearch$ = new Subject<string>();
@@ -16,6 +20,10 @@ class Navigation extends Component<StoreProps> {
 
   constructor(props: Readonly<StoreProps>) {
     super(props);
+
+    this.state = {
+      activeViewType: 0
+    };
 
     this.onSearch = this.onSearch.bind(this);
     this.onFilter = this.onFilter.bind(this);
@@ -38,12 +46,15 @@ class Navigation extends Component<StoreProps> {
     const data = store.get('data');
 
     return (
-      <Field className="is-horizontal is-grouped is-grouped-centered navigation">
+      <Field
+        className="is-horizontal is-grouped is-grouped-centered navigation"
+        data-testid="navigation">
         <div className="field-body">
           <Field className="has-addons">
             <Control className="is-expanded has-icons-left">
               <input
                 ref={ref => (this.searchRef = ref)}
+                aria-label="search-input"
                 type="text"
                 className="input"
                 placeholder="Search"
@@ -56,18 +67,28 @@ class Navigation extends Component<StoreProps> {
 
             <Control>
               <div className="select">
-                <select defaultValue="statecode:number:0" onChange={this.onFilter}>
-                  <option value="statecode:number:0">Active</option>
-                  <option value="statecode:number:1">Inactive</option>
+                <select
+                  aria-label="statecode-input"
+                  defaultValue="statecode:number:0"
+                  onChange={this.onFilter}>
+                  <option data-testid="active" value="statecode:number:0">
+                    Active
+                  </option>
+                  <option data-testid="inactive" value="statecode:number:1">
+                    Inactive
+                  </option>
                 </select>
               </div>
             </Control>
 
             <Control>
               <div className="select">
-                <select onChange={this.onFilter}>
+                <select aria-label="stateorprovince-input" onChange={this.onFilter}>
                   {this.getStateOrProvince(data).map((item, index: number) => (
-                    <option key={index} value={`address1_stateorprovince:string:${item}`}>
+                    <option
+                      data-testid={`sop:${item}`}
+                      key={index}
+                      value={`address1_stateorprovince:string:${item}`}>
                       {item}
                     </option>
                   ))}
@@ -76,7 +97,12 @@ class Navigation extends Component<StoreProps> {
             </Control>
 
             <Control>
-              <button type="button" className="button" data-type={0} onClick={this.onReset}>
+              <button
+                aria-label="reset-button"
+                type="button"
+                className="button"
+                data-type={0}
+                onClick={this.onReset}>
                 Reset
               </button>
             </Control>
@@ -84,14 +110,28 @@ class Navigation extends Component<StoreProps> {
 
           <Field className="has-addons is-flex-grow-0">
             <Control>
-              <button type="button" className="button" data-type={0} onClick={this.onViewType}>
+              <button
+                aria-label="list-button"
+                type="button"
+                className={`button list-button ${
+                  this.state.activeViewType === 0 ? 'is-active' : ''
+                }`}
+                data-type={0}
+                onClick={this.onViewType}>
                 <Icon>
                   <span className="ion-md-reorder" />
                 </Icon>
               </button>
             </Control>
             <Control>
-              <button type="button" className="button" data-type={1} onClick={this.onViewType}>
+              <button
+                aria-label="card-button"
+                type="button"
+                className={`button card-button ${
+                  this.state.activeViewType === 1 ? 'is-active' : ''
+                }`}
+                data-type={1}
+                onClick={this.onViewType}>
                 <Icon>
                   <span className="ion-md-apps" />
                 </Icon>
@@ -133,6 +173,7 @@ class Navigation extends Component<StoreProps> {
     if (!viewTypeString) return;
 
     const viewType = parseInt(viewTypeString, 10);
+    this.setState({ activeViewType: viewType });
     this.props.sharedOptions.set('viewType')(viewType);
   }
 

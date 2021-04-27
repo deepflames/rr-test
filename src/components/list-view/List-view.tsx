@@ -42,12 +42,12 @@ class ListView extends Component<StoreProps, State> {
     const data = store.get('data');
 
     return (
-      <div className="list-view">
+      <div data-testid="list-view" className="list-view">
         {viewType === 0 &&
           data?.map(
             (item: Account, index) =>
               item.accountnumber && (
-                <Box key={index}>
+                <Box key={index} data-testid={`list-type-${index}`}>
                   <Media>
                     <Media.Item>
                       <Content>
@@ -64,11 +64,14 @@ class ListView extends Component<StoreProps, State> {
           )}
 
         {viewType === 1 && (
-          <Columns className="is-multiline">
+          <Columns data-testid="card-type" className="is-multiline">
             {data?.map(
               (item: any, index) =>
                 item.accountnumber && (
-                  <Columns.Column key={index} className="is-one-third">
+                  <Columns.Column
+                    key={index}
+                    data-testid="card-type-column"
+                    className="is-one-third">
                     <Card>
                       <Card.Content>
                         <Media>

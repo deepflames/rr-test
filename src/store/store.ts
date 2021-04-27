@@ -1,4 +1,4 @@
-import { Store, createConnectedStoreAs, EffectsAs } from 'undux/dist.esnext/index.js';
+import { Store, createConnectedStoreAs, EffectsAs } from 'undux';
 import effects from './effects';
 import { Account } from '../common/models/account';
 

@@ -18,14 +18,16 @@ class Main extends Component<StoreProps, unknown> {
     const isPreloaderVisible = sharedOptions.get('onPreloader');
 
     return (
-      <div className="_main">
+      <div className="_main" data-testid="main-wrapper">
         {isPreloaderVisible && <Preloader />}
 
-        <Section className="_navigation">
+        <Section className="_navigation" data-testid="navigation-wrapper">
           <Navigation />
         </Section>
 
-        <Section className="_list-view">{data && <ListView />}</Section>
+        <Section className="_list-view" data-testid="list-view-wrapper">
+          {data && <ListView />}
+        </Section>
       </div>
     );
   }
