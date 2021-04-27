@@ -26,7 +26,7 @@ const initialSharedOptions: SharedOptionsType = {
   onData: null,
   viewType: 0,
   onSearch: void 0,
-  onFilter: '-1',
+  onFilter: 'all:-1',
   onPreloader: false
 };
 
